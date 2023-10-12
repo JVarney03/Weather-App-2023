@@ -1,4 +1,13 @@
 body {
-   
-    background-color: blue;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #EEF6FC;
+}
+
+.weather-result-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #D4E8F7;
 }
