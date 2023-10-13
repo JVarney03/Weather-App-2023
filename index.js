@@ -9,15 +9,20 @@ import {apiKey} from "./secrets.mjs";
 const apiCoordsUrl = "http://api.openweathermap.org/geo/1.0/direct"
 const apiWeatherUrl = "https://api.openweathermap.org/data/2.5/weather"
 
+
 //set up app
 const app = express();
 const port = 3000;
+
 
 //Middleware
 var lat = 0
 var lon = 0
 
+
+//Converst city to lat and lon coordinates to be passed to weather API
 async function  getLongLat  (req, res, next) {
+    //Try get coords
     try {
         const response = await axios.get(apiCoordsUrl,
             {
@@ -26,8 +31,7 @@ async function  getLongLat  (req, res, next) {
                    appid: apiKey
                 }
             });
-        // const lat = response.data.lat;
-        // const lon = response.data.lon;
+        //record coords to be used in weather request
         lat = response.data[0].lat;
         lon = response.data[0].lon;
 
@@ -49,10 +53,12 @@ app.get("/", (req,res) => {
 })
 
 
-
+//Middleware placed here to avoid being used on page load
 app.use(getLongLat);
 
+
 app.post("/", async (req,res) => {
+    //Try get weather info
     try {
         const result = await axios.get(apiWeatherUrl, 
             {
@@ -63,8 +69,16 @@ app.post("/", async (req,res) => {
             }
         });
 
-        console.log(result.data);
-        res.render("index.ejs", {city: req.body.city});
+
+        //Convert kelvin to degrees celsius
+        const temperature = Math.round(result.data.main.temp - 273.15)
+
+        res.render("index.ejs", 
+        {
+            city: req.body.city,
+            temp: temperature,
+            description: result.data.weather[0].main
+        });
     } catch(error) {
         console.log("Failed to make request :", error.message);
     }

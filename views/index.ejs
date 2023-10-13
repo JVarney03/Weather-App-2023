@@ -35,8 +35,20 @@
             cloud
         </span>
 
-        <h1 class="temperature">28</h1>
-        <h3 class="weather-description">Cloudy</h3>
+        <h1 class="temperature">
+            <% if (locals.temp) { %>
+                <%= temp %>
+            <% } else { %>
+                28
+            <% } %>
+        </h1>
+        <h3 class="weather-description">
+            <% if (locals.description) { %>
+                <%= description %>
+            <% } else { %>
+                Cloudy
+            <% } %>
+        </h3>
     </div>
 
 </body>
