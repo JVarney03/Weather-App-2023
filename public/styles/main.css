@@ -14,6 +14,22 @@ body {
     background-color: #EEF6FC;
 }
 
+.reset-button {
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    border-width: 0;
+    font-family: inherit;
+    font-size: inherit;
+    font-style: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    padding: 0;
+  }
+
+
+
+
 h1 {
     font-weight: bold;
     font-size: 4rem;
@@ -30,13 +46,17 @@ h3 {
 }
 
 .search-bar {
-    display: flex;
-    align-items: center;
+    width: clamp(200px, 30vw, 500px );
     padding: 5px;
     margin-top: 50px;
     border: solid;
     border-radius: 25px;
     border-color: #5CA9E0;
+}
+
+form {
+    display: flex;
+    align-items: center;
 }
 
 .search-icon {
@@ -45,11 +65,12 @@ h3 {
 }
 
 input[type=text] {
+    width: 100%;
     font-family: 'Poppins', sans-serif;
     font-size: 1.5rem;
     font-weight: 500;
-    width: clamp(200px, 30vw, 500px );
     border: none;
+    border-radius: 0 25px 25px 0;
     background-color: transparent;
     padding-left: 5px;
 }

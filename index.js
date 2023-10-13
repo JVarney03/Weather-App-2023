@@ -2,8 +2,6 @@ import express from "express";
 import axios from "axios";
 import bodyParser from "body-parser";
 
-<<<<<<< HEAD
-=======
 import {apiKey} from "./secrets.mjs";
 
 //API Info
@@ -11,13 +9,10 @@ import {apiKey} from "./secrets.mjs";
 const apiCoordsUrl = "http://api.openweathermap.org/geo/1.0/direct"
 const apiWeatherUrl = "https://api.openweathermap.org/data/2.5/weather"
 
->>>>>>> 0142dfd (Fixed data breach)
 //set up app
 const app = express();
 const port = 3000;
 
-<<<<<<< HEAD
-=======
 //Middleware
 var lat = 0
 var lon = 0
@@ -44,20 +39,17 @@ async function  getLongLat  (req, res, next) {
 }
 
 
->>>>>>> 0142dfd (Fixed data breach)
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
 //Requests
 
 app.get("/", (req,res) => {
-    res.render("index.ejs");
+    res.render("index.ejs",);
 })
 
 
 
-<<<<<<< HEAD
-=======
 app.use(getLongLat);
 
 app.post("/", async (req,res) => {
@@ -71,14 +63,14 @@ app.post("/", async (req,res) => {
             }
         });
 
-        console.log()
+        console.log(result.data);
+        res.render("index.ejs", {city: req.body.city});
     } catch(error) {
         console.log("Failed to make request :", error.message);
     }
-    res.render("index.ejs", {city: "London"});
+    
 });
 
->>>>>>> 0142dfd (Fixed data breach)
 
 
 

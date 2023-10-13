@@ -12,16 +12,24 @@
 </head>
 <body>
     <div class="search-bar">
-        <span class="material-symbols-outlined search-icon">
-            search
-        </span>
-        <form action="">
+        <form action="/" method="POST">
+            <button class="reset-button" type="submit">
+                <span class="material-symbols-outlined search-icon">
+                    search
+                </span>
+            </button>
             <input type="text" name="city" placeholder="Search City">
         </form>
     </div>
 
     <div class="weather-result-container">
-        <h2 class="location">London</h2>
+        <h2 class="location">
+            <% if (locals.city) { %>
+             <%= city %>
+            <% } else { %>
+                London
+            <% } %>
+        </h2>
         
         <span class="material-symbols-outlined weather-icon">
             cloud
