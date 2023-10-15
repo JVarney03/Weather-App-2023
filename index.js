@@ -4,15 +4,27 @@ import bodyParser from "body-parser";
 
 import {apiKey} from "./secrets.mjs";
 
+
+
+
 //API Info
 
 const apiCoordsUrl = "http://api.openweathermap.org/geo/1.0/direct"
 const apiWeatherUrl = "https://api.openweathermap.org/data/2.5/weather"
 
 
+
+
 //set up app
 const app = express();
 const port = 3000;
+
+const icons = {Thunderstorm: "thunderstorm", Drizzle: "rainy", Rain: "rainy", Snow: "cloudy snowing", Clear: "sunny", Clouds: "cloud" }
+
+
+
+
+
 
 
 //Middleware
@@ -46,6 +58,14 @@ async function  getLongLat  (req, res, next) {
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
+
+
+
+
+
+
+
+
 //Requests
 
 app.get("/", (req,res) => {
@@ -72,12 +92,14 @@ app.post("/", async (req,res) => {
 
         //Convert kelvin to degrees celsius
         const temperature = Math.round(result.data.main.temp - 273.15)
+        console.log(result.data.weather[0].main)
 
         res.render("index.ejs", 
         {
             city: req.body.city,
+            icon: icons[result.data.weather[0].main],
             temp: temperature,
-            description: result.data.weather[0].main
+            description: result.data.weather[0].description
         });
     } catch(error) {
         console.log("Failed to make request :", error.message);

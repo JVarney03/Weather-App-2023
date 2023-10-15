@@ -32,7 +32,11 @@
         </h2>
         
         <span class="material-symbols-outlined weather-icon">
-            cloud
+            <% if (locals.icon) { %>
+                <%= icon %>
+            <% } else { %>
+                unknown_med
+            <% } %>
         </span>
 
         <h1 class="temperature">
